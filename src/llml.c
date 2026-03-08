@@ -27,5 +27,12 @@ int main()
     float cube_volume = volume_cube(7.4f);
     float cube_surface_area = surface_area_cube(7.4f);
     printf("cube volume: %f\ncube_surface_area: %f\n", cube_volume, cube_surface_area);
+
+    /* cuboid testing */
+    float cuboid_volume = volume_cuboid(6.4f, 6.1f, 6.3f);
+    float cuboid_surface_area = surface_area_cuboid(6.4f, 6.1f, 6.3f);
+    printf("cuboid volume: %f\ncuboid_surface_area: %f\n", cuboid_volume, cuboid_surface_area);
+
+    
     return 0;
 }
