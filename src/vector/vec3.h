@@ -31,3 +31,12 @@ static inline float vec3_length(vec3 v)
 {
     return sqrtf(v.x * v.x + v.y * v.y + v.z * v.z);
 }
+
+static inline vec3 vec3_normalized(vec3 v) 
+{
+    float len = vec3_length(v);
+    if (len > 0.0f) {
+        return vec3_scale(v, 1.0f / len);
+    }
+    return (vec3){0.0f, 0.0f, 0.0f};
+}
