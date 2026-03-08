@@ -1,7 +1,9 @@
 #include <stdio.h>
+#include "area/circle.h"
 
 int main() 
 {
-    printf("Hello, C!\n");
+    double area = circle_area(3.55);
+    printf("%f", area);
     return 0;
 }
