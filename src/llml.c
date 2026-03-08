@@ -17,5 +17,10 @@ int main()
     float rectangle_area = area_rectangle(3.4f, 5.2f);
     float rectangle_perimeter = perimeter_rectangle(3.4f, 5.2f);
     printf("rectangle area: %f\nrectangle perimeter: %f\n", rectangle_area, rectangle_perimeter);
+
+    /* triangle testing */
+    float triangle_area = area_triangle(4.5f, 5.5f);
+    float triangle_perimeter = perimeter_triangle(2.2f, 3.3f, 4.4f);
+    printf("triangle area: %f\ntriangle perimeter: %f\n", triangle_area, triangle_perimeter);
     return 0;
 }
