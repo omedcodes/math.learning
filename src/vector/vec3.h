@@ -1,7 +1,6 @@
 #pragma once
 
-typedef struct 
-{
+typedef struct {
     float x;
     float y;
     float z;
@@ -39,4 +38,13 @@ static inline vec3 vec3_normalized(vec3 v)
         return vec3_scale(v, 1.0f / len);
     }
     return (vec3){0.0f, 0.0f, 0.0f};
+}
+
+static inline float vec3_dot(vec3 a, vec3 b) {
+    return (a.x * b.x) + (a.y * b.y) + (a.z * b.z);
+}
+
+static inline vec3 vec3_cross(vec3 a, vec3 b) 
+{
+    return (vec3){ .x = a.y * b.z - a.z * b.y, .y = a.z * b.x - a.x * b.z, .z = a.x * b.y - a.y * b.x};
 }
