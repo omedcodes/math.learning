@@ -7,3 +7,4 @@
 
 #include "volume/cube.h"
 #include "volume/cuboid.h"
+#include "volume/sphere.h"

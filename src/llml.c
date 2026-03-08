@@ -33,6 +33,9 @@ int main()
     float cuboid_surface_area = surface_area_cuboid(6.4f, 6.1f, 6.3f);
     printf("cuboid volume: %f\ncuboid_surface_area: %f\n", cuboid_volume, cuboid_surface_area);
 
-    
+    /* sphere testing */
+    float sphere_volume = volume_sphere(3.55f);
+    float sphere_surface_area = surface_area_sphere(3.55f);
+    printf("sphere volume: %f\nsphere_surface_area: %f\n", sphere_volume, sphere_surface_area); 
     return 0;
 }
