@@ -37,5 +37,10 @@ int main()
     float sphere_volume = volume_sphere(3.55f);
     float sphere_surface_area = surface_area_sphere(3.55f);
     printf("sphere volume: %f\nsphere_surface_area: %f\n", sphere_volume, sphere_surface_area); 
+
+    /* cylinder testing */
+    float cylinder_volume = volume_cylinder(3.55f, 5.2f);
+    float cylinder_surface_area = surface_area_cylinder(3.55f, 5.2f);
+    printf("cylinder volume: %f\ncylinder_surface_area: %f\n", cylinder_volume, cylinder_surface_area); 
     return 0;
 }
