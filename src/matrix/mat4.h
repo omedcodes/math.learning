@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../vector/vec3.h"
+#include "./trigonometry/trigonometry.h"
 #include <math.h>
 
 typedef struct {
@@ -90,4 +91,40 @@ static inline mat4 mat_look_at(vec3 eye, vec3 target, vec3 up) {
     result.data[13] = -vec3_dot(u, eye);
     result.data[14] = vec3_dot(f, eye);
     return result;
+}
+
+static inline mat4 mat4_rotate_z(mat4 m, float degrees) {
+    float rad = llml_deg_to_rad(degrees);
+    float c = cosf(rad);
+    float s = sinf(rad);
+    mat4 rot = mat4_identity();
+    rot.data[0] = c;
+    rot.data[4] = -s;
+    rot.data[1] = s;
+    rot.data[5] = c;
+    return mat4_multiply(m, rot);
+}
+
+static inline mat4 mat4_rotate_x(mat4 m, float degrees) {
+    float rad = llml_deg_to_rad(degrees);
+    float c = cosf(rad);
+    float s = sinf(rad);
+    mat4 rot = mat4_identity();
+    rot.data[5] = c;
+    rot.data[9] = -s;
+    rot.data[6] = s;
+    rot.data[10] = c;
+    return mat4_multiply(m, rot);
+}
+
+static inline mat4 mat4_rotate_y(mat4 m, float degrees) {
+    float rad = llml_deg_to_rad(degrees);
+    float c = cosf(rad);
+    float s = sinf(rad);
+    mat4 rot = mat4_identity();
+    rot.data[0] = c;
+    rot.data[8] = s;
+    rot.data[2] = -s;
+    rot.data[10] = c;
+    return mat4_multiply(m, rot);
 }
