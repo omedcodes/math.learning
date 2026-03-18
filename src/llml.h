@@ -9,6 +9,8 @@
 #include "algebra/algebra.h"
 #include "trigonometry/trigonometry.h"
 
+#include "physics/collision.h"
+
 #include "area/circle.h"
 #include "area/square.h"
 #include "area/rectangle.h"
