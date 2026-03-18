@@ -1,26 +1,23 @@
 #include <stdio.h>
 #include "llml.h"
 
-int main() 
-{
-    _seed(798980);
+int main() {
+    // 1. Color Test
+    vec4 orange = color_hex(0xFF5733);
+    printf("Orange Hex (0xFF5733) to Vec4: [%.2f, %.2f, %.2f, %.2f]\n", 
+            orange.x, orange.y, orange.z, orange.w);
 
-    printf("--- RNG Integer Test (Dice) ---\n");
-    for (int i = 0; i < 5; i++) {
-        printf("Roll %d: %d\n", i + 1, _rand_int_range(1, 6));
+    // 2. Easing Test
+    float t = 0.5f;
+    printf("Smoothstep at 0.5: %f (Should be 0.5)\n", smoothstep(t));
+    printf("Bounce at 0.5: %f\n", ease_out_bounce(t));
+
+    // 3. Collision Test
+    vec3 p1 = {0,0,0};
+    vec3 p2 = {1,1,1};
+    if (col_sphere_vs_sphere(p1, 1.0f, p2, 1.0f)) {
+        printf("Spheres are colliding!\n");
     }
 
-    printf("\n--- RNG Float Test (0.0 to 1.0) ---\n");
-    for (int i = 0; i < 3; i++) {
-        printf("Float %d: %f\n", i, _rand_float());
-    }
-
-    printf("\n--- 3D Random Vector Test ---\n");
-    // lets gen a random dir and check its length
-    // if its normalized length should be 1.0f
-    vec3 rand_dir = _rand_vec3_direction();
-    printf("Random dir: [%f, %f, %f]\n", rand_dir.x, rand_dir.y, rand_dir.z);
-    printf("Dir Length: %f (should be 1.0)\n", vec3_length(rand_dir));
-    
     return 0;
 }

@@ -8,7 +8,7 @@
 
 #include "algebra/algebra.h"
 #include "trigonometry/trigonometry.h"
-
+#include "easing/easing.h"
 #include "physics/collision.h"
 #include "random/random.h"
 
@@ -25,5 +25,6 @@
 #include "vector/vec2.h"
 #include "vector/vec3.h"
 #include "vector/vec4.h"
+#include "vector/vec4_color.h"
 
 #include "matrix/mat4.h"
