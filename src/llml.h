@@ -10,6 +10,7 @@
 #include "trigonometry/trigonometry.h"
 
 #include "physics/collision.h"
+#include "random/random.h"
 
 #include "area/circle.h"
 #include "area/square.h"
