@@ -13,7 +13,7 @@ else
 		EXEC = $(TARGET)
 endif
 
-SRC = src/llml.c
+SRC = src/visualizer.c
 OBJ = $(SRC:.c=.o)
 
 all: $(EXEC)

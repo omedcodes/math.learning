@@ -34,7 +34,6 @@ int main() {
     printf("\nBenchmark Results:\n");
     printf("1 Million Matrix-Vector Multiplications: %f seconds\n", end - start);
     
-    // CRITICAL: Print the result so the compiler doesn't skip the loop!
     printf("Final Point Result: [%.2f, %.2f, %.2f]\n", point.x, point.y, point.z);
     
     return 0;
