@@ -6,8 +6,8 @@
 static uint32_t _rng_state = 10000;
 
 /*
- * Sets the global seed for the Xorshift32 generator.
- * @Note A seed of 0 is not allowed and will be defaulted to 10000.
+ * sets the global seed for the xorshift32 random number generator.
+ * a seed value of zero is not allowed and will be replaced with 10000.
  */
 static inline void _seed(uint32_t seed) 
 {
@@ -16,8 +16,8 @@ static inline void _seed(uint32_t seed)
 }
 
 /*
- * Generates a random 32-bit unsigned integer using the Xorshift algorithm.
- * This is significantly faster than standard rand().
+ * generates a random unsigned 32 bit integer using the xorshift algorithm.
+ * this is significantly faster than the standard rand function.
  */
 static inline uint32_t _rand_uint32(void) 
 {
@@ -30,33 +30,36 @@ static inline uint32_t _rand_uint32(void)
 }
 
 /*
- * Returns a random floating point number between 0.0 and 1.0.
+ * generates a random floating point number in the range 0.0 to 1.0 inclusive.
  */
 static inline float _rand_float(void) {
     return (float)_rand_uint32() / (float)UINT32_MAX;
 }
 
 /*
- * Generates a random integer within a specific [min, max] range.
+ * generates a random integer within the inclusive range from min to max.
  */
 static inline int _rand_int_range(int _min, int _max) {
     return _min + (_rand_uint32() % (_max - _min + 1));
 }
 
 /*
- * Generates a random float within a specific [min, max] range.
+ * generates a random float within the inclusive range from min to max.
  */
 static inline float _rand_float_range(float _min, float _max) {
     return _min + _rand_float() * (_max - _min);
 }
 
 /*
- * Generates a random bool within a true or false range.
+ * generates a random boolean value that is either true or false with equal probability.
  */
 static inline bool _rand_bool(void) {
     return (_rand_uint32() % 2) == 0;
 }
 
+/*
+ * generates a vec3 with each component set to a random float within the given min to max range.
+ */
 static inline vec3 _rand_vec3_range(float _min, float _max) {
     return (vec3) {
       _rand_float_range(_min, _max),
@@ -65,6 +68,10 @@ static inline vec3 _rand_vec3_range(float _min, float _max) {
   };
 }
 
+/*
+ * generates a random unit vec3 pointing in a uniformly distributed random direction.
+ * the result is normalized so its length is 1.
+ */
 static inline vec3 _rand_vec3_direction(void) {
     vec3 v = _rand_vec3_range(-1.0f, 1.0f);
     return vec3_normalized(v);

@@ -1,17 +1,24 @@
 #pragma once
 
+#include <math.h>
 #include "llml/vector/vec3.h"
 #include "llml/trigonometry/trigonometry.h"
-#include <math.h>
 
 typedef struct {
     float data[16];
 } mat4;
 
+/*
+ * creates a 4x4 identity matrix where the diagonal elements are 1 and all others are 0.
+ */
 static inline mat4 mat4_identity(void) {
     return (mat4){.data = {1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f} };
 }
 
+/*
+ * multiplies two 4x4 matrices together and returns the resulting matrix.
+ * the matrices are stored in column major order.
+ */
 static inline mat4 mat4_multiply(mat4 a, mat4 b) {
     mat4 result = {0};
     for (int col = 0; col < 4; col++) {
@@ -26,6 +33,10 @@ static inline mat4 mat4_multiply(mat4 a, mat4 b) {
     return result;
 }
 
+/*
+ * applies a translation to a 4x4 matrix by the given 3d vector and returns the result.
+ * the translation modifies the last column of the matrix.
+ */
 static inline mat4 mat4_translate(mat4 m, vec3 v) {
     mat4 result = m;
     result.data[12] = m.data[0] * v.x + m.data[4] * v.y + m.data[8] * v.z + m.data[12];
@@ -35,6 +46,10 @@ static inline mat4 mat4_translate(mat4 m, vec3 v) {
     return result;
 }
 
+/*
+ * applies a non uniform scale to a 4x4 matrix by the given 3d vector and returns the result.
+ * each column group of the matrix is multiplied by the corresponding scale component.
+ */
 static inline mat4 mat4_scale(mat4 m, vec3 v) {
     mat4 result = m;
     for (int i = 0; i < 4; i++) result.data[i] *= v.x;
@@ -43,6 +58,10 @@ static inline mat4 mat4_scale(mat4 m, vec3 v) {
     return result;
 }
 
+/*
+ * transforms a 3d vector by a 4x4 matrix and returns the resulting 3d vector.
+ * assumes the vector has an implicit w component of 1 so translation is applied.
+ */
 static inline vec3 mat4_mul_vec3(mat4 m, vec3 v) {
     return (vec3){
         m.data[0] * v.x + m.data[4] * v.y + m.data[8] * v.z + m.data[12],
@@ -51,6 +70,10 @@ static inline vec3 mat4_mul_vec3(mat4 m, vec3 v) {
     };
 }
 
+/*
+ * transforms a 4d vector by a 4x4 matrix and returns the resulting 4d vector.
+ * the w component of the input vector is used in the computation.
+ */
 static inline vec4 mat4_mul_vec4(mat4 m, vec4 v) {
     return (vec4){
         m.data[0] * v.x + m.data[4] * v.y + m.data[8] * v.z + m.data[12] * v.w,
@@ -60,6 +83,11 @@ static inline vec4 mat4_mul_vec4(mat4 m, vec4 v) {
     };
 }
 
+/*
+ * creates a perspective projection matrix from a vertical field of view in radians,
+ * an aspect ratio, and near and far clipping plane distances.
+ * maps 3d coordinates into normalized device coordinates for rendering.
+ */
 static inline mat4 mat4_perspective(float fov_radians, float aspect, float near_p, float far_p) {
     mat4 result = {0};
     float tan_half_fov = tanf(fov_radians / 2.0f);
@@ -71,6 +99,10 @@ static inline mat4 mat4_perspective(float fov_radians, float aspect, float near_
     return result;
 }
 
+/*
+ * creates an orthographic projection matrix from left, right, bottom, top, near, and far plane values.
+ * maps 3d coordinates linearly into normalized device coordinates without perspective distortion.
+ */
 static inline mat4 mat4_ortho(float left, float right, float bottom, float top, float near_p, float far_p) {
     mat4 result = mat4_identity();
     result.data[0] = 2.0f / (right - left);
@@ -82,6 +114,10 @@ static inline mat4 mat4_ortho(float left, float right, float bottom, float top, 
     return result;
 }
 
+/*
+ * creates a view matrix that orients the camera at the eye position looking toward the target position.
+ * the up vector defines which direction is considered upward in world space.
+ */
 static inline mat4 mat_look_at(vec3 eye, vec3 target, vec3 up) {
     vec3 f = vec3_normalized(vec3_subtract(target, eye));
     vec3 s = vec3_normalized(vec3_cross(f, up));
@@ -102,6 +138,10 @@ static inline mat4 mat_look_at(vec3 eye, vec3 target, vec3 up) {
     return result;
 }
 
+/*
+ * applies a rotation around the z axis by the given angle in degrees to a 4x4 matrix
+ * and returns the result.
+ */
 static inline mat4 mat4_rotate_z(mat4 m, float degrees) {
     float rad = llml_deg_to_rad(degrees);
     float c = cosf(rad);
@@ -114,6 +154,10 @@ static inline mat4 mat4_rotate_z(mat4 m, float degrees) {
     return mat4_multiply(m, rot);
 }
 
+/*
+ * applies a rotation around the x axis by the given angle in degrees to a 4x4 matrix
+ * and returns the result.
+ */
 static inline mat4 mat4_rotate_x(mat4 m, float degrees) {
     float rad = llml_deg_to_rad(degrees);
     float c = cosf(rad);
@@ -126,6 +170,10 @@ static inline mat4 mat4_rotate_x(mat4 m, float degrees) {
     return mat4_multiply(m, rot);
 }
 
+/*
+ * applies a rotation around the y axis by the given angle in degrees to a 4x4 matrix
+ * and returns the result.
+ */
 static inline mat4 mat4_rotate_y(mat4 m, float degrees) {
     float rad = llml_deg_to_rad(degrees);
     float c = cosf(rad);

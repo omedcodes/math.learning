@@ -1,8 +1,7 @@
 #pragma once
 
 /*
- * Calculates the total area of a circle.
- * Formula: PI * radius^2
+ * calculates the area of a circle using pi times radius squared.
  */
 static inline float area_circle(float radius) 
 {
@@ -10,10 +9,9 @@ static inline float area_circle(float radius)
 }
 
 /*
- * Calculates the perimeter (circumference) of a circle.
- * Formula: 2 * PI * radius
+ * calculates the circumference of a circle using 2 times pi times radius.
  */
 static inline float circumference_circle(float radius) 
 {
-    return 2.0 * M_PI * radius;
+    return 2.0f * M_PI * radius;
 }
